@@ -1,4 +1,4 @@
-name: Deploy nestjs-travel-api
+name: Deploy template-nestjs
 on:
   push:
     branches:
@@ -13,9 +13,9 @@ jobs:
       - run: docker build -t ${{ secrets.DOCKER_USERNAME }}/react-test -f Dockerfile.dev .
       - run: docker run -e CI=true ${{ secrets.DOCKER_USERNAME }}/react-test npm test
 
-      - run: docker build -t ${{ secrets.DOCKER_USERNAME }}/nestjs-travel-api .
+      - run: docker build -t ${{ secrets.DOCKER_USERNAME }}/template-nestjs .
 
-      - run: docker push ${{ secrets.DOCKER_USERNAME }}/nestjs-travel-api
+      - run: docker push ${{ secrets.DOCKER_USERNAME }}/template-nestjs
 
       - name: Generate deployment package
         run: zip -r deploy.zip . -x '*.git*'
@@ -25,8 +25,8 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
           aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
-          application_name: nest-travel-aws
-          environment_name: Nest-travel-aws-env
+          application_name: template-nestjs
+          environment_name: Template-nestjs-env
           existing_bucket_name: elasticbeanstalk-eu-north-1-146463422607
           region: eu-north-1
           version_label: ${{ github.sha }}
