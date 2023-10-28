@@ -1,10 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
 
-const mockAppController = {
-  getHello: jest.fn(),
-};
-
 describe('App Controller', () => {
   let controller: AppController;
 
@@ -22,11 +18,7 @@ describe('App Controller', () => {
   });
   describe('getHello', () => {
     it('should successfully return Hello', () => {
-      jest
-        .spyOn(controller, 'getHello')
-        .mockImplementation(() => "Hello");
       const result = controller.getHello();
-      expect(controller.getHello).toHaveBeenCalled();
       expect(result).toEqual("Hello");
     });
   });
