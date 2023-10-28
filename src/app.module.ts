@@ -1,8 +1,5 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TripsModule } from './trips/trips.module';
-import { AuthModule } from './auth/auth.module';
-import { AllTripsModule } from './all-trips/all-trips.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { configValidationSchema } from './config.schema';
 import { AppController } from './app.controller';
@@ -13,8 +10,6 @@ import { AppController } from './app.controller';
       envFilePath: [`.env.stage.${process.env.STAGE}`],
       validationSchema: configValidationSchema,
     }),
-    TripsModule,
-    AuthModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -37,7 +32,6 @@ import { AppController } from './app.controller';
         };
       },
     }),
-    AllTripsModule,
   ],
   controllers: [AppController],
 })
